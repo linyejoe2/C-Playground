@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "*.sql": "sql",
+    "*.swig": "html",
+    "stack": "cpp",
+    "vector": "cpp",
+    "xtree": "cpp",
+    "ostream": "cpp",
+    "iostream": "cpp",
+    "algorithm": "cpp"
+  }
+}
