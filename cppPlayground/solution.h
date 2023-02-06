@@ -91,10 +91,26 @@ class Solution {
 
         if (i == nums.size()) return maxVal;  // end case.
 
-        if (currVal < 1) return maxSubArray(nums, nums[i], max(maxVal, nums[i]), i + 1);
+        if (currVal < 1)
+            return maxSubArray(nums, nums[i], max(maxVal, nums[i]), i + 1);
         return maxSubArray(nums, currVal + nums[i],
                            max(maxVal, currVal + nums[i]), i + 1);
         // return maxSubArray(nums, max(maxVal, maxVal + nums[i]), i + 1);
+    }
+
+    /**
+     * @brief leetcode 1470.
+     * @date 02/06/2023
+     * @author linyejoe2
+     * @see https://leetcode.com/problems/shuffle-the-array/
+     */
+    vector<int> shuffle(vector<int> &nums, int n) {
+        vector<int> ans ;
+        for (int i = 0; i < nums.size() - n; i++) {
+            ans.push_back(nums[i]);
+            ans.push_back(nums[i + n]);
+        }
+        return ans;
     }
 };
 
