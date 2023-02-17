@@ -10,6 +10,16 @@
 
 using namespace std;
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right)
+        : val(x), left(left), right(right) {}
+};
+
 class Solution {
    public:
     Solution();
@@ -105,12 +115,26 @@ class Solution {
      * @see https://leetcode.com/problems/shuffle-the-array/
      */
     vector<int> shuffle(vector<int> &nums, int n) {
-        vector<int> ans ;
+        vector<int> ans;
         for (int i = 0; i < nums.size() - n; i++) {
             ans.push_back(nums[i]);
             ans.push_back(nums[i + n]);
         }
         return ans;
+    }
+
+    /**
+     * @brief leetcode 104.
+     * @date 02/16/2023
+     * @author linyejoe2
+     * @see https://leetcode.com/problems/maximum-depth-of-binary-tree/
+     * @return int
+     */
+    int maxDepth(TreeNode *root) { return dfs(root, 0); }
+
+    int dfs(TreeNode *root, int depth = 0) {
+        if (!root) return depth;
+        return max(dfs(root->left, depth + 1), dfs(root->right, depth + 1));
     }
 };
 
