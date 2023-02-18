@@ -136,6 +136,80 @@ class Solution {
         if (!root) return depth;
         return max(dfs(root->left, depth + 1), dfs(root->right, depth + 1));
     }
+
+    /**
+     * @brief leetcode 783.
+     * @date 02/17/2023
+     * @author linyejoe2
+     * @see https://leetcode.com/problems/minimum-distance-between-bst-nodes/
+     *
+     * @param root
+     * @return int
+     */
+    int minDiffInBST(TreeNode *root) {
+        vector<int> nums;
+        int minVal = INT_MAX;
+
+        df(root, &nums);
+
+        for (int i = 0; i < nums.size() - 1; i++) {
+            minVal = min(minVal, abs(nums[i] - nums[i + 1]));
+        }
+        return minVal;
+    }
+
+    void df(TreeNode *root, vector<int> *nums) {
+        if (!root) return;
+
+        df(root->left, nums);
+        nums->push_back(root->val);
+        df(root->right, nums);
+    }
+
+    /**
+     * @brief leetcode 226.
+     * @date 02/18/2023
+     * @author linyejoe2
+     * @see https://leetcode.com/problems/invert-binary-tree/description/
+     *
+     * @param root
+     * @return TreeNode*
+     */
+    TreeNode *invertTree(TreeNode *root) {
+        _invertTree(root);
+        return root;
+    }
+
+    void _invertTree(TreeNode *root) {
+        if (!root) {
+            return;
+        }
+        _invertTree(root->left);
+        _invertTree(root->right);
+
+        TreeNode temp = *root->right;
+        root->right = root->left;
+        root->left = &temp;
+    }
+
+    /**
+     * @brief leetcode 226.
+     * @date 02/18/2023
+     * @author linyejoe2
+     * @see https://leetcode.com/problems/invert-binary-tree/description/
+     * @version 2
+     * 
+     * @param root
+     * @return TreeNode*
+     */
+    TreeNode *invertTree(TreeNode *root) {
+        if (!root) return root;
+        TreeNode *left = invertTree(root->left);
+        TreeNode *right = invertTree(root->right);
+        root->left = right;
+        root->right = left;
+        return root;
+    }
 };
 
 #endif  // SOLUTION_H
